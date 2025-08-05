@@ -1,8 +1,9 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import { useTheme } from "../context/theme-context";
+import { useThemeStore } from "../store/use-theme.store";
 
 export const ChangeTheme = () => {
-  const { theme, toggleTheme } = useTheme();
+  const theme = useThemeStore((state) => state.theme);
+  const toggleTheme = useThemeStore((state) => state.toggleTheme);
 
   return (
     <View>

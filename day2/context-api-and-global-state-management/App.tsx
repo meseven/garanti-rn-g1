@@ -1,20 +1,14 @@
 import { StyleSheet, View } from "react-native";
 import { Settings } from "./src/components/settings";
 import { ChangeLang } from "./src/components/change-lang";
-import { LangContextProvider } from "./src/context/lang-context";
-import { ThemeContextProvider } from "./src/context/theme-context";
 import { ChangeTheme } from "./src/components/change-theme";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ThemeContextProvider>
-        <LangContextProvider>
-          <Settings />
-          <ChangeLang />
-          <ChangeTheme />
-        </LangContextProvider>
-      </ThemeContextProvider>
+      <Settings />
+      <ChangeLang />
+      <ChangeTheme />
     </View>
   );
 }
