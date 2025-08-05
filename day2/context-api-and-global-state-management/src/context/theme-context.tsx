@@ -1,5 +1,6 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Theme } from "../types/theme";
+import { getData, storeData } from "../helpers/async-storage";
 
 type ContextType = {
   theme: Theme;
@@ -16,6 +17,25 @@ export const ThemeContextProvider = ({
   children,
 }: ThemeContextProviderProps) => {
   const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    const loadTheme = async () => {
+      try {
+        const savedTheme = await getData<Theme>("theme", "light");
+        if (savedTheme) {
+          setTheme(savedTheme);
+        }
+      } catch (error) {
+        console.log("Theme yüklenirken hata:", error);
+      }
+    };
+
+    loadTheme();
+  }, []);
+
+  useEffect(() => {
+    storeData("theme", theme);
+  }, [theme]);
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
