@@ -12,7 +12,7 @@ export const Settings = () => {
       <Text style={styles.text}>Settings Component</Text>
       <Text style={styles.text}>Aktif dil: {lang}</Text>
       <Text style={styles.text}>Aktif tema: {theme}</Text>
-      <ChangeLangButtons />
+      <ChangeLangButtons  />
     </View>
   );
 };
