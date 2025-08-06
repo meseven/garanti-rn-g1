@@ -24,9 +24,9 @@ export const Item = ({ id, username }: IProps) => {
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: "#f9c2ff",
     padding: 10,
     borderBottomWidth: 1,
+    borderBottomColor: "#ccc",
   },
   title: {
     fontSize: 26,
