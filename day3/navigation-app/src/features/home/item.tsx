@@ -2,22 +2,22 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../../types/navigation";
+import { User } from "../../types/user";
 
 type IProps = {
-  id: string;
-  username: string;
+  user: User;
 };
 
-export const Item = ({ id, username }: IProps) => {
+export const Item = ({ user: { id, name } }: IProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
     <TouchableOpacity
       style={styles.item}
-      onPress={() => navigation.navigate("Detail", { id, username })}
+      onPress={() => navigation.navigate("Detail", { id, name })}
     >
-      <Text style={styles.title}>{username}</Text>
+      <Text style={styles.title}>{name}</Text>
     </TouchableOpacity>
   );
 };

@@ -4,10 +4,10 @@ import { HomeScreen } from "./src/screens/home";
 import { DetailScreen } from "./src/screens/detail";
 import { RootStackParamList } from "./src/types/navigation";
 import { CustomHeaderTitle } from "./src/components/custom-header-title";
-import { Button } from "@react-navigation/elements";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { ProfileScreen } from "./src/screens/profile";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const HomeStack = createNativeStackNavigator<RootStackParamList>({
   initialRouteName: "Home",
@@ -22,7 +22,7 @@ const HomeStack = createNativeStackNavigator<RootStackParamList>({
     Detail: {
       screen: DetailScreen,
       options: ({ route }) => ({
-        title: route.params.username,
+        title: route.params.name,
       }),
     },
   },
@@ -70,6 +70,18 @@ const RootStack = createNativeStackNavigator({
 
 const Navigation = createStaticNavigation(RootStack);
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 0,
+    },
+  },
+});
+
 export default function App() {
-  return <Navigation />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Navigation />
+    </QueryClientProvider>
+  );
 }
